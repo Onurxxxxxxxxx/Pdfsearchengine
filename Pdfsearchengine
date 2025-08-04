@@ -1,0 +1,117 @@
+
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EKitap PDF Arama Sitesi</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input[type="text"] {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .buttons {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+        a.button-link {
+            text-decoration: none;
+        }
+        .download-btn {
+            background-color: #28a745;
+        }
+        .download-btn:hover {
+            background-color: #1e7e34;
+        }
+    </style>
+</head>
+<body>
+    <h1>EKitap PDF Arama Sitesi</h1>
+    <form id="searchForm" onsubmit="return handleSearch()">
+        <input type="text" id="searchQuery" placeholder="Aramak istediğiniz PDF veya E-kitap..." required />
+        <button type="submit">Ara</button>
+    </form>
+
+    <div class="buttons">
+        <a id="ekitapSite" class="button-link" target="_blank" href="#">
+            <button>Yönlendir: EKitap.site</button>
+        </a>
+        <a id="pdfdriveSite" class="button-link" target="_blank" href="#">
+            <button>Yönlendir: Pdfdrive</button>
+        </a>
+        <a id="mirazSite" class="button-link" target="_blank" href="#">
+            <button>Yönlendir: Mir.az</button>
+        </a>
+    </div>
+
+    <script>
+        function handleSearch() {
+            const query = encodeURIComponent(document.getElementById('searchQuery').value.trim());
+            if (!query) return false;
+
+            // URL'leri belirleme
+            const ekitapUrl = \`https://ekitap.site/?s=\${query}\`;
+            const pdfdriveUrl = \`https://www.pdfdrive.com/search?q=\${query}\`;
+            const mirazUrl = \`https://mir.az/search?query=\${query}\`;
+
+            // Yönlendirme
+            // Kullanıcının seçim yapmasını sağlayan butonlar veya dropdown ekleyebilirsiniz.
+
+            // Burada örnek olarak ilk siteye yönlendiriyoruz
+            window.open(ekitapUrl, '_blank');
+
+            return false; // Formun submit olmasını engeller
+        }
+
+        // Butonlara tıklandığında farklı sitelere yönlendirme
+        document.getElementById('ekitapSite').onclick = () => {
+            const query = encodeURIComponent(document.getElementById('searchQuery').value.trim());
+            const url = \`https://ekitap.site/?s=\${query}\`;
+            window.open(url, '_blank');
+        };
+        document.getElementById('pdfdriveSite').onclick = () => {
+            const query = encodeURIComponent(document.getElementById('searchQuery').value.trim());
+            const url = \`https://www.pdfdrive.com/search?q=\${query}\`;
+            window.open(url, '_blank');
+        };
+        document.getElementById('mirazSite').onclick = () => {
+            const query = encodeURIComponent(document.getElementById('searchQuery').value.trim());
+            const url = \`https://mir.az/search?query=\${query}\`;
+            window.open(url, '_blank');
+        };
+    </script>
+</body>
+</html>
